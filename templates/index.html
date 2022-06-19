@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>NoLocks Perm Map</title>
+</head>
+<body style="margin: 0; padding: 0;">
+<div id="mymap" style="height: 100vh; width: 100vw">
+    <script>
+        var mymap = L.map('mymap').setView([58.007556, 56.2397], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <b>N0-Locks Perm</b> <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+
+        {% for point in points %}
+        L.marker([{{ point.latitude }}, {{ point.longitude }}]).addTo(mymap).
+        bindPopup('{% if point.image %} <img style="width: 51px;" src={{ MEDIA_URL }}{{ point.image }}>  <br> {% endif %} {{ point.comment }}');
+        {% endfor %}
+    </script>
+</div>
+</body>
+</html>
