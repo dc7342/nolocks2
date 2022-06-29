@@ -62,6 +62,9 @@ class ApiTestCase(TestCase):
             self.assertTrue(loc["latitude"])
             self.assertTrue(loc["comment"])
 
+    def test_post_location(self):
+        pass
+
     def get_token(self):
         response = self.client.post("http://testserver/api/token/", {
             "username": self.user.username, "password": self.passwrd

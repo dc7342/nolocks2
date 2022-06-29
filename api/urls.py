@@ -8,7 +8,7 @@ from rest_framework_simplejwt.views import (
 from api.views import LocationViewSet
 
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 router.register(r'location', LocationViewSet)
 
 urlpatterns = [
